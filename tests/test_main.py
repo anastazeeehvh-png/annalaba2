@@ -22,5 +22,18 @@ class TestDiagonalSums(unittest.TestCase):
         self.assertEqual(main.anti_diagonal_sum(m), 5)
 
 
+class TestCompare(unittest.TestCase):
+    def test_equal(self):
+        self.assertEqual(main.compare_sums(5, 5), "Суммы диагоналей равны")
+
+    def test_greater(self):
+        self.assertEqual(main.compare_sums(16, 15),
+                         "Сумма главной диагонали больше суммы побочной")
+
+    def test_less(self):
+        self.assertEqual(main.compare_sums(-5.5, 5),
+                         "Сумма главной диагонали меньше суммы побочной")
+
+
 if __name__ == "__main__":
     unittest.main()

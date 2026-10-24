@@ -1,6 +1,8 @@
 """Диагонали матрицы: сравнение сумм главной и побочной диагоналей."""
 import math
 
+EPS = 1e-9
+
 
 def main_diagonal_sum(matrix):
     """Сумма элементов главной диагонали."""
@@ -11,6 +13,15 @@ def anti_diagonal_sum(matrix):
     """Сумма элементов побочной диагонали."""
     n = len(matrix)
     return sum(matrix[i][n - 1 - i] for i in range(n))
+
+
+def compare_sums(main_sum, anti_sum):
+    """Сравнивает суммы диагоналей и возвращает текст результата."""
+    if abs(main_sum - anti_sum) <= EPS:
+        return "Суммы диагоналей равны"
+    if main_sum > anti_sum:
+        return "Сумма главной диагонали больше суммы побочной"
+    return "Сумма главной диагонали меньше суммы побочной"
 
 
 def read_size():
@@ -48,8 +59,11 @@ def read_matrix(n):
 def main():
     n = read_size()
     matrix = read_matrix(n)
-    print(f"Сумма элементов главной диагонали: {main_diagonal_sum(matrix):.2f}")
-    print(f"Сумма элементов побочной диагонали: {anti_diagonal_sum(matrix):.2f}")
+    s_main = main_diagonal_sum(matrix)
+    s_anti = anti_diagonal_sum(matrix)
+    print(f"Сумма элементов главной диагонали: {s_main:.2f}")
+    print(f"Сумма элементов побочной диагонали: {s_anti:.2f}")
+    print(compare_sums(s_main, s_anti))
 
 
 if __name__ == "__main__":
